@@ -59,19 +59,38 @@ int IEEEbin2dec(string w)
     return wynik;
 }
 
+string dec2bin(int input)
+{
+    string ret = "";
+
+    while(input>0)
+    {
+        int result = input%2;
+        input = input/2;
+        if(result==1)
+        {
+            ret.push_back('1');
+        }else
+        {
+            ret.push_back('0');
+        }
+    }
+    string ret2 = ret;
+    int j = ret.length()-1;
+    for(int i = 0;i<(int)ret.length();i++)
+    {
+        ret2[i] = ret[j];
+        j--;
+    }
+
+    return ret2;
+}
+
 
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    string w;
-    cout << "Podaj IEEE"<<endl;
-    string sss;
-    cin>>sss;
-    cout<<IEEEbin2dec(sss);
-
-
-
 
     return 0;
 }
