@@ -118,12 +118,12 @@ int IEEEbin2dec(string w)
     {
         wykladnik.push_back(w[i]);
     }
-    cout<<wykladnik<<endl;
+    //cout<<wykladnik<<endl;
     for(int i = 9;i<=31;i++)
     {
         mantysa.push_back(w[i]);
     }
-    cout<<mantysa<<endl;
+    //cout<<mantysa<<endl;
     wykladnik_dec = bin2dec(wykladnik);
     int e = wykladnik_dec - 127;
 
@@ -189,32 +189,58 @@ float WEWbin2dec(string w)
     return wynik;
 }
 
-string dec2IEEEbin(int input)
+string dec2IEEEbin(double number)
 {
+    long wholePart = (long) number;
+    double fractionalPart = number - wholePart;
+
     string sign = "";
     string mantisa = "";
     string exponent = "";
-    if (input>=0)
+    if (number>=0)
         sign.push_back('0');
     else
         sign.push_back('1');
 
-    string input_bin = dec2bin(input);
-    int e = input_bin.length()-1;
+    string whole_bin = dec2bin(wholePart);
+    string fractional_bin = dec2bin(fractionalPart);
+    string number_bin = whole_bin+fractional_bin;
+        for(int i = 0;i<(int)number_bin.length()-1;i++)
+        {
+            mantisa.push_back(number_bin[i+1]);
+        }
+    int e = whole_bin.length()-1;
     int exponent_dec = e+127;
     exponent = dec2bin(exponent_dec);
+    string exp2 = "";
+    if(exponent.length()!=8)
+    {
+        for(int i = 0; i<8-(int)exponent.length();i++)
+        {
+            exp2.push_back('0');
+        }
+        exp2 = exp2 + exponent;
+    }else{
+        exp2 = exponent;
+    }
 
+    string res = sign+exp2+mantisa;
 
-
-
-
-    return sign+exponent+mantisa;
+    for(int j = (int)res.length();j<32;j++)
+    {
+        res.push_back('0');
+    }
+    return res;
 }
 
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+
+    string input;
+    cin>>input;
+    cout<<IEEEbin2dec(input)<<endl;
 
     return 0;
 }
