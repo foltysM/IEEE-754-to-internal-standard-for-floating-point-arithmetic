@@ -189,6 +189,7 @@ float WEWbin2dec(string w)
     return wynik;
 }
 
+<<<<<<< HEAD
 string dec2IEEEbin(double number)
 {
     long wholePart = (long) number;
@@ -233,6 +234,61 @@ string dec2IEEEbin(double number)
     return res;
 }
 
+=======
+string dec2WEWbin(float input)
+{
+    string ret = "";
+    string wykladnik = "";
+    string mantysa = "";
+    string binput = dec2bin(input);
+    int binput_l = binput.length();
+    int e = 0;
+    int sign = 0;
+
+    if (input<0)
+    {
+        input = abs(input);
+        sign = 1;
+    }
+
+    for(int i =0; i < binput_l; i++)
+    {
+        if(binput[i] == '.')
+        {
+            e = i-1;
+        }
+    }
+    if(e==0) e = binput.length()-1;
+
+    string wykladnik2 = dec2bin(e);
+    if(wykladnik2.length()<7)
+    {
+        for(int i = 0; i <7 - int(wykladnik2.length()); i++)
+            wykladnik.push_back('0');
+    }
+    wykladnik = wykladnik + wykladnik2;
+
+    for(int i = 1; i <= 23; i++)
+    {
+        if(i < binput_l)
+        {
+            mantysa.push_back(binput[i]);
+        }
+        else
+        {
+            mantysa.push_back('0');
+        }
+
+    }
+
+    if(sign == 0) ret.push_back('1');
+    if(sign == 1) ret.push_back('0');
+    ret += wykladnik;
+    ret.push_back('0');
+    ret += mantysa;
+    return  ret;
+}
+>>>>>>> 842297765871520ad991a248b20cfffd7e666d28
 
 int main(int argc, char *argv[])
 {
