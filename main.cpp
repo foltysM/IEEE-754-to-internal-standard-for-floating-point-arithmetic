@@ -86,6 +86,28 @@ string dec2bin(int input)
     return ret2;
 }
 
+string dec2IEEEbin(int input)
+{
+    string sign = "";
+    string mantisa = "";
+    string exponent = "";
+    if (input>=0)
+        sign.push_back('0');
+    else
+        sign.push_back('1');
+
+    string input_bin = dec2bin(input);
+    int e = input_bin.length()-1;
+    int exponent_dec = e+127;
+    exponent = dec2bin(exponent_dec);
+
+
+
+
+
+    return sign+exponent+mantisa;
+}
+
 
 
 int main(int argc, char *argv[])
