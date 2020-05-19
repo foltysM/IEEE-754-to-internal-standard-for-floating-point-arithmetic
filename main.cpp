@@ -118,12 +118,10 @@ int IEEEbin2dec(string w)
     {
         wykladnik.push_back(w[i]);
     }
-    //cout<<wykladnik<<endl;
     for(int i = 9;i<=31;i++)
     {
         mantysa.push_back(w[i]);
     }
-    //cout<<mantysa<<endl;
     wykladnik_dec = bin2dec(wykladnik);
     int e = wykladnik_dec - 127;
 
@@ -189,7 +187,7 @@ float WEWbin2dec(string w)
     return wynik;
 }
 
-<<<<<<< HEAD
+
 string dec2IEEEbin(double number)
 {
     long wholePart = (long) number;
@@ -234,7 +232,6 @@ string dec2IEEEbin(double number)
     return res;
 }
 
-=======
 string dec2WEWbin(float input)
 {
     string ret = "";
@@ -288,15 +285,31 @@ string dec2WEWbin(float input)
     ret += mantysa;
     return  ret;
 }
->>>>>>> 842297765871520ad991a248b20cfffd7e666d28
+
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    string input;
-    cin>>input;
-    cout<<IEEEbin2dec(input)<<endl;
+    cout<<"W ktora strone chcesz przekonwertowac liczbe?\n\t";
+    cout<<"1. IEEE 754 ==> wewnetrzny\n\t";
+    cout<<"2. Wewnetrzny ==> IEEE 754\n";
+    int in = 0;
+    string in2;
+    cin>>in;
+    switch(in)
+    {
+    case 1:
+        cout<<"Podaj liczbe binarna w formacie IEEE 754"<<endl;
+        cin>>in2;
+        cout<<dec2WEWbin(IEEEbin2dec(in2))<<endl;
+        break;
+    case 2:
+        cout<<"Podaj liczbe binarna w formacie wewnetrznym"<<endl;
+        cin>>in2;
+        cout<<dec2IEEEbin(WEWbin2dec(in2))<<endl;
+        break;
+    }
 
     return 0;
 }
